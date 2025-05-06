@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <a href="{% url 'ajouter_preavis' pk=1 %}" class="btn btn-custom mb-3">Ajouter un Préavis</a>
+
+<h2 class="mb-4">Liste des Préavis</h2>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Locataire</th>
+            <th>Date de début</th>
+            <th>Date de fin</th>
+            <th>Raison</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for preavis in preavis %}
+        <tr>
+            <td>{{ preavis.locataire.utilisateur }}</td>
+            <td>{{ preavis.date_debut }}</td>
+            <td>{{ preavis.date_fin }}</td>
+            <td>{{ preavis.raison }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

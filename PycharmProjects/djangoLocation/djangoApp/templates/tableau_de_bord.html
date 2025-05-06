@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Tableau de Bord</h2>
+
+<div class="container">
+    <div class="row">
+        <!-- Carte pour les Appartements -->
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-primary shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Appartements</h5>
+                    <p class="card-text display-4">{{ compteur_appartements }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte pour les Locataires -->
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-success shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Locataires</h5>
+                    <p class="card-text display-4">{{ compteur_locataires }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte pour les Paiements -->
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-warning shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Paiements</h5>
+                    <p class="card-text display-4">{{ compteur_paiements }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte pour les Préavis -->
+        <div class="col-md-3 mb-3">
+            <div class="card text-white bg-danger shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Préavis</h5>
+                    <p class="card-text display-4">{{ compteur_preavis }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

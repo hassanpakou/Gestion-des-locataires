@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<a class="btn btn-custom mb-3" href="{% url 'ajouter_locataire' %}">Liste des Locataires</a>
+
+<h2 class="mb-4">Liste des Locataires</h2>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Utilisateur</th>
+            <th>Appartement</th>
+            <th>Date d'entrée</th>
+            <th>Date de sortie</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for locataire in locataires %}
+        <tr>
+            <td>{{ locataire.utilisateur }}</td>
+            <td>{{ locataire.appartement.numero }}</td>
+            <td>{{ locataire.date_entree }}</td>
+            <td>{{ locataire.date_sortie }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

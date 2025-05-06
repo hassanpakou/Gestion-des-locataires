@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <a href="{% url 'ajouter_appartement' %}" class="btn btn-custom mb-3">Ajouter appartement</a>
+
+<h2 class="mb-4">Liste des Appartements</h2>
+<div class="d-flex justify-content-end mb-3">
+
+</div>
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Numéro</th>
+            <th>Surface</th>
+            <th>Nombre de pièces</th>
+            <th>Loyer</th>
+            <th>Date d'ajout</th>
+            <th>Occupé</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appartement in appartements %}
+        <tr>
+            <td>{{ appartement.numero }}</td>
+            <td>{{ appartement.surface }}</td>
+            <td>{{ appartement.nombre_pieces }}</td>
+            <td>{{ appartement.loyer }}</td>
+            <td>{{ appartement.date_ajout }}</td>
+            <td>{{ appartement.est_occupe|yesno:"Oui,Non" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

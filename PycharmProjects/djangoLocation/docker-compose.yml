@@ -1,0 +1,60 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: gunicorn djangoLocation.wsgi:application --bind 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      - DJANGO_SETTINGS_MODULE=djangoLocation.settings
+      - DATABASE_URL=mysql://root:@db/location
+      - CELERY_BROKER_URL=amqp://rabbitmq
+      - CELERY_RESULT_BACKEND=rpc://
+    networks:
+      - django_network
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: location
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - django_network
+
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - django_network
+
+  celery:
+    build: .
+    command: celery -A djangoLocation worker --loglevel=info
+    depends_on:
+      - db
+      - rabbitmq
+    environment:
+      - CELERY_BROKER_URL=amqp://rabbitmq
+      - CELERY_RESULT_BACKEND=rpc://
+    networks:
+      - django_network
+
+volumes:
+  mysql_data:
+
+networks:
+  django_network:
+    driver: bridge

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+            <a href="{% url 'enregistrer_paiement' %}" class="btn btn-custom mb-3">Ajouter appartement</a>
+
+<h2 class="mb-4">Liste des Paiements</h2>
+<div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Locataire</th>
+                <th>Montant</th>
+                <th>Date de paiement</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paiement in paiements %}
+            <tr>
+                <td>{{ paiement.locataire.utilisateur }}</td>
+                <td>{{ paiement.montant }}</td>
+                <td>{{ paiement.date_paiement }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
